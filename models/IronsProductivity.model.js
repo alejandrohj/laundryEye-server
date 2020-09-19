@@ -2,6 +2,10 @@ const {Schema, model} = require('mongoose');
 
 const IronsProductivityDataSchema = new Schema(
   {
+     status: {
+       type: String,
+       enum: ['operating','waiting','emergency','off']
+     },
      iron: Number,
      productivity: {
        program: Number,

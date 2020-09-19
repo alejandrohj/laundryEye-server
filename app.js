@@ -15,19 +15,19 @@ const app          = express();
 const cors         = require('cors')
 
 
-app.use(session({
-  secret: 'plaundry-project',
-  saveUninitialized: true,
-  resave: true,
-  cookie: {
-    maxAge: 60*60*24*1000
-  },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60,
-    autoRemove: 'disabled',
-  })
-}));  
+// app.use(session({
+//   secret: 'plaundry-project',
+//   saveUninitialized: true,
+//   resave: true,
+//   cookie: {
+//     maxAge: 60*60*24*1000
+//   },
+//   store: new MongoStore({
+//     mongooseConnection: mongoose.connection,
+//     ttl: 24 * 60 * 60,
+//     autoRemove: 'disabled',
+//   })
+// }));  
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
