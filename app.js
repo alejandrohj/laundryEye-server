@@ -56,10 +56,15 @@ app.use(require('node-sass-middleware')({
 
 
 
-const index = require('./routes/index');
-app.use('/', index);
+// const index = require('./routes/index');
+// app.use('/', index);
 const productionData = require('./routes/productionData.route');
 app.use('/api', productionData);
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 
 module.exports = app;
