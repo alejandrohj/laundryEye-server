@@ -39,8 +39,8 @@ app.use(cors({
   origin: ['http://localhost:3000']
 }))
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'hbs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -61,10 +61,9 @@ app.use(require('node-sass-middleware')({
 const productionData = require('./routes/productionData.route');
 app.use('/api', productionData);
 
-app.use(express.static('client/build'));
-app.get("*", (req, res) => {
-    res.sendFile(require('path')
-        .resolve(__dirname, 'client', 'build', 'index.html'));
-})
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 module.exports = app;
