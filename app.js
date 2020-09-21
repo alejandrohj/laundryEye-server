@@ -61,10 +61,10 @@ app.use(require('node-sass-middleware')({
 const productionData = require('./routes/productionData.route');
 app.use('/api', productionData);
 
-app.use((req, res, next) => {
-  // If no routes match, send them the React HTML.
-  res.sendFile(__dirname + "/public/index.html");
-});
-
+app.use(express.static('client/build'));
+app.get("*", (req, res) => {
+    res.sendFile(require('path')
+        .resolve(__dirname, 'client', 'build', 'index.html'));
+})
 
 module.exports = app;
