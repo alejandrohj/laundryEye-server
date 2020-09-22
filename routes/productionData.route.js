@@ -19,9 +19,9 @@ router.get('/ironsdata', (req, res, next) => {
 });
 
 router.post('/irondata/add',(req,res)=>{
-  const {iron, productivity} = req.body;
+  const {status, iron, productivity} = req.body;
 
-  IronsProductivityDataSchema.create({iron, productivity})
+  IronsProductivityDataSchema.create({status, iron, productivity})
     .then((data)=>{
       res.status(200).json(data)
     })
