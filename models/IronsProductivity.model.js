@@ -4,7 +4,7 @@ const IronsProductivityDataSchema = new Schema(
   {
      status: {
        type: String,
-       enum: ['operating','waiting','emergency','off']
+       enum: ['operating','waiting','non-operating','emergency','off']
      },
      iron: Number,
      productivity: {
