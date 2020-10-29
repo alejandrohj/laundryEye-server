@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 let IronsProductivityDataSchema = require('../models/IronsProductivity.model')
+let TunelCageWasher = require('../models/Tunel_Cages_washer.model');
 
 /* GET home page */
 router.get('/ironsdata', (req, res, next) => {
@@ -45,6 +46,32 @@ router.post('/ironrealtimedata/update',(req,res)=>{
         message: err
       })
     })
+})
+
+router.get('/tlc',(req,res)=>{
+  TunelCageWasher.find()
+    .then((data)=>{
+      res.status(200).json(data)
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        error: 'No data found',
+        message: err
+      })
+    })
+})
+
+router.post('/tlc/add',(req,res)=>{
+  TunelCageWasher.create({status,orders})
+  .then((data)=>{
+    res.status(200).json(data)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error: 'No data added',
+      message: err
+    })
+  })
 })
 
 module.exports = router;
