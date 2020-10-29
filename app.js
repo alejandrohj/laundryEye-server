@@ -14,21 +14,6 @@ const MongoStore   = require('connect-mongo')(session);
 const app          = express();
 const cors         = require('cors')
 
-
-// app.use(session({
-//   secret: 'plaundry-project',
-//   saveUninitialized: true,
-//   resave: true,
-//   cookie: {
-//     maxAge: 60*60*24*1000
-//   },
-//   store: new MongoStore({
-//     mongooseConnection: mongoose.connection,
-//     ttl: 24 * 60 * 60,
-//     autoRemove: 'disabled',
-//   })
-// }));  
-
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
@@ -60,6 +45,23 @@ app.use(require('node-sass-middleware')({
 // app.use('/', index);
 const productionData = require('./routes/productionData.route');
 app.use('/api', productionData);
+
+app.use(session({
+  secret: 'laundryEye-project',
+  saveUninitialized: true,
+  resave: true,
+  cookie: {
+    maxAge: 60*60*24*1000
+  },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60,
+    autoRemove: 'disabled',
+  })
+}));  
+
+const authorization = require('./routes/authorization');
+app.use('/api', authorization);
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
