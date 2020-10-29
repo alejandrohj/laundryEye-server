@@ -4,7 +4,7 @@ const TunelCagesasherDataSchema = new Schema(
   {
      status: {
        type: String,
-       enum: ['operating','washing', 'drying','off']
+       enum: ['operating','washing','drying','off']
      },
      orders: {
        type: String,
