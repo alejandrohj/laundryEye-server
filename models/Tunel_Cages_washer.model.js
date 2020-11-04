@@ -9,7 +9,11 @@ const TunelCagesasherDataSchema = new Schema(
      orders: {
        type: String,
        enum: ['none','start','stop']
-     }
+     },
+     timeWashing: Number,
+     timeDrying: Number,
+     timeToWash: Number,
+     timeToDry: Number
   },
   {
     timestamps: true
