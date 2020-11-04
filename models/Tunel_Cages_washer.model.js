@@ -13,7 +13,9 @@ const TunelCagesasherDataSchema = new Schema(
      timeWashing: Number,
      timeDrying: Number,
      timeToWash: Number,
-     timeToDry: Number
+     timeToDry: Number,
+     timeToWashRemoteModifiyed: Number,
+     timeToDryRemoteModifiyed: Number
   },
   {
     timestamps: true

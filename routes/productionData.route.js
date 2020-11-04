@@ -63,8 +63,8 @@ router.get('/tlc',(req,res)=>{
 
 router.post('/tlc/add',(req,res)=>{
   console.log(req.body)
-  const {status, orders, timeWashing,timeDrying,timeToWash,timeToDry} = req.body;
-  TunelCageWasher.create({status,orders,timeWashing, timeDrying, timeToWash, timeToDry})
+  const {status, orders, timeWashing,timeDrying,timeToWash,timeToDry, timeToWashRemoteModifiyed, timeToDryRemoteModifiyed} = req.body;
+  TunelCageWasher.create({status,orders,timeWashing, timeDrying, timeToWash, timeToDry, timeToWashRemoteModifiyed, timeToDryRemoteModifiyed})
   .then((data)=>{
     res.status(200).json(data)
   })
