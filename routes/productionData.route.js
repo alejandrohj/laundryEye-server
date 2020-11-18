@@ -76,4 +76,21 @@ router.post('/tlc/add',(req,res)=>{
   })
 })
 
+router.get('/rtdata/delete',(req,res)=>{
+  let dateOneHourBefore = new Date();
+  TunelCageWasher.deleteMany({})
+    .then((cartsWasherData)=>{
+      IronsProductivityDataSchema.deleteMany({})
+      .then((ironsData)=>{
+        res.status(200).json(cartsWasherData, ironsData)
+      })
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        error: 'No data added',
+        message: err
+      })
+    })
+})
+
 module.exports = router;
