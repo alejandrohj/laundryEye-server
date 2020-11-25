@@ -14,7 +14,8 @@ const IronsProductivityDataSchema = new Schema(
        productionPost1: Number,
        productionPost2: Number,
        productionPost3: Number
-     }
+     },
+     count: Number
   },
   {
     timestamps: true

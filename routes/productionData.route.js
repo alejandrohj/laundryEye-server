@@ -22,7 +22,7 @@ router.get('/ironsdata', (req, res, next) => {
 
 router.post('/irondata/add',(req,res)=>{
   const {status, iron, productivity} = req.body;
-  IronsProductivityDataSchema.create({status, iron, productivity})
+  IronsProductivityDataSchema.create({status, iron, productivity, count: Count})
     .then((data)=>{
       res.status(200).json(data)
       Count = Count +1;
