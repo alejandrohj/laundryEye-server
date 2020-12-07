@@ -32,6 +32,7 @@ router.post('/irondata/add',(req,res)=>{
         .then((cartsWasherData)=>{
           IronsProductivityDataSchema.deleteMany({})
           .then((ironsData)=>{
+            Count = 0; 
             res.status(200).json(cartsWasherData, ironsData)
           })
         })
