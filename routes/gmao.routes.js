@@ -1,8 +1,7 @@
 const express = require('express');
 const router  = express.Router();
-
-let Warehouses = require('../models/warehouse.model');
-let Items = require('../models/item.model');
+const Items = require('../models/item.model');
+const Warehouses = require('../models/warehouse.model');
 
 router.post('/gmao/warehouses/create',(req,res)=>{
   const {name, floor} = req.body;
@@ -14,27 +13,27 @@ router.post('/gmao/warehouses/create',(req,res)=>{
     .catch((err)=>{
       res.status(500).json({
         error: 'No data created',
-        message: err
+        message: errxw
       })
     })
 })
 
 router.get('/gmao/warehouses',(req,res)=>{
   Warehouses.find()
-  .then((data)=>{
-    res.status(200).json(data)
+  .populate({
+    path:'stock.itemId'
   })
-  .catch((err)=>{
-    res.status(500).json({
-      error: 'No data found',
-      message: err
-    })
+  .then((data)=>{
+    console.log(data)
+    res.status(200).json(data)
   })
 })
 
 router.post('/gmao/warehouse/:id/update',(req,res)=>{
-  const {name, items} = req.body;
-  Warehouses.findByIdAndUpdate(req.params.id,{$set:{name:name,items:items}})
+  const {stock} = req.body;
+  console.log(req.params.id,'warehouseId')
+  console.log(stock,'items')
+  Warehouses.findByIdAndUpdate(req.params.id,{$set:{stock: stock}})
     .then((data)=>{
       res.status(200).json(data)
     })
@@ -47,9 +46,8 @@ router.post('/gmao/warehouse/:id/update',(req,res)=>{
 })
 
 router.post('/gmao/item/create',(req,res)=>{
-  const {name,category,subcategory,price,commentary} = req.body;
-
-  Items.create({name,category,subcategory,price,commentary})
+  const {name,branch,ref,category,subcategory,unit,commentary,price} = req.body;
+  Items.create({name,branch,ref,category,subcategory,unit,commentary,price})
     .then((data)=>{
       res.status(200).json(data)
     })
@@ -60,6 +58,18 @@ router.post('/gmao/item/create',(req,res)=>{
       })
     })
 })
-
+ 
+router.get('/gmao/items',(req,res)=>{
+  Items.find()
+  .then((data)=>{
+    res.status(200).json(data)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error: 'No data found',
+      message: err
+    })
+  })
+})
 
 module.exports = router;

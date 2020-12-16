@@ -10,9 +10,10 @@ const warehouseSchema = new Schema({
     required: true
   },
   stock: [{
-    item: {
+    _id:false,
+    itemId: {
       type: Schema.Types.ObjectId,
-      ref: 'items'
+      ref: 'item'
     },
     quantity: Number
   }]
