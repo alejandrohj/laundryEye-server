@@ -62,6 +62,8 @@ app.use(session({
 
 const authorization = require('./routes/authorization');
 app.use('/api', authorization);
+const gmao = require('./routes/gmao.routes');
+app.use('/api', gmao);
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
