@@ -45,6 +45,19 @@ router.post('/gmao/warehouse/:id/update',(req,res)=>{
     })
 })
 
+router.get('/gmao/warehouse/:id',(req,res)=>{
+  Warehouses.find({_id:req.params.id})
+    .then((data)=>{
+      res.status(200).json(data)
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        error: 'No data created',
+        message: err
+      })
+    })
+})
+
 router.post('/gmao/item/create',(req,res)=>{
   const {name,branch,ref,category,subcategory,unit,commentary,price} = req.body;
   Items.create({name,branch,ref,category,subcategory,unit,commentary,price})
