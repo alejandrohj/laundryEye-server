@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const itemSchema = new mongoose.Schema({
+const itemSchema = new Schema({
   name:{
     type: String,
     required: true,
@@ -23,8 +23,16 @@ const itemSchema = new mongoose.Schema({
   provider:{
     type: String
   },
+  createBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'user'
+  },
+  updatedBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+},
   commentary: String,
   price: Number
 })
 
-module.exports = mongoose.model('item', itemSchema)
+module.exports = model('item', itemSchema)

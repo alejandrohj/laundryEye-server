@@ -59,8 +59,9 @@ router.get('/gmao/warehouse/:id',(req,res)=>{
 })
 
 router.post('/gmao/item/create',(req,res)=>{
+  let createBy = req.session.loggedInUser;
   const {name,branch,ref,category,subcategory,unit,commentary,price} = req.body;
-  Items.create({name,branch,ref,category,subcategory,unit,commentary,price})
+  Items.create({name,branch,ref,category,subcategory,unit,commentary,price,createBy: createBy._id})
     .then((data)=>{
       res.status(200).json(data)
     })
@@ -72,8 +73,9 @@ router.post('/gmao/item/create',(req,res)=>{
     })
 })
 router.post('/gmao/item/:id/update',(req,res)=>{
+  let updatedBy = req.session.loggedInUser;
   const {name,branch,ref,category,subcategory,unit,commentary,price} = req.body;
-  Items.findByIdAndUpdate(req.params.id,{$set:{name,branch,ref,category,subcategory,unit,commentary,price}})
+  Items.findByIdAndUpdate(req.params.id,{$set:{name,branch,ref,category,subcategory,unit,commentary,price, updatedBy: updatedBy._id}})
     .then((data)=>{
       res.status(200).json(data)
     })
@@ -111,14 +113,10 @@ router.get('/gmao/items',(req,res)=>{
 })
 router.get('/gmao/item/:id',(req,res)=>{
   Items.findById({_id:req.params.id})
+  .populate('createBy')
+  .populate('updatedBy')
   .then((data)=>{
     res.status(200).json(data)
-  })
-  .catch((err)=>{
-    res.status(500).json({
-      error: 'No data found',
-      message: err
-    })
   })
 })
 

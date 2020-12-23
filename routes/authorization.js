@@ -6,7 +6,7 @@ const { isLoggedIn } = require('../helpers/auth-helper');
 
 const UserModel = require('../models/user.model');
 
-router.post('/signup', (req, res) => {
+router.post('/signup',isLoggedIn, (req, res) => {
   const {userName, firstName, lastName, email, password, userType} = req.body;
   if (!userName) {
     res.status(500)
@@ -151,6 +151,18 @@ router.post('/logout', (req, res) => {
 
 router.get('/user', isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
+});
+router.get('/user/all', isLoggedIn, (req, res, next) => {
+  UserModel.find()
+    .then((data)=>{
+      res.status(200).json(data)
+    }).catch((err) => {
+      res.status(500).json({
+        error: 'Cannot find any user',
+        message: err
+      })
+      return;
+    });
 });
 
 router.post('/user/:id/edit', isLoggedIn, (req, res) => {
