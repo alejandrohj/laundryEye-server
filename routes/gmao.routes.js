@@ -71,9 +71,46 @@ router.post('/gmao/item/create',(req,res)=>{
       })
     })
 })
+router.post('/gmao/item/:id/update',(req,res)=>{
+  const {name,branch,ref,category,subcategory,unit,commentary,price} = req.body;
+  Items.findByIdAndUpdate(req.params.id,{$set:{name,branch,ref,category,subcategory,unit,commentary,price}})
+    .then((data)=>{
+      res.status(200).json(data)
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        error: 'No data created',
+        message: err
+      })
+    })
+})
+router.delete('/gmao/item/:id/delete',(req,res)=>{
+  Items.findByIdAndDelete(req.params.id)
+    .then((data)=>{
+      res.status(200).json(data)
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        error: 'No data created',
+        message: err
+      })
+    })
+})
  
 router.get('/gmao/items',(req,res)=>{
   Items.find()
+  .then((data)=>{
+    res.status(200).json(data)
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      error: 'No data found',
+      message: err
+    })
+  })
+})
+router.get('/gmao/item/:id',(req,res)=>{
+  Items.findById({_id:req.params.id})
   .then((data)=>{
     res.status(200).json(data)
   })
