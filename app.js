@@ -55,7 +55,7 @@ app.use(session({
   },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60,
+    ttl: 24 * 60 * 60 * 7,
     autoRemove: 'disabled',
   })
 }));  
