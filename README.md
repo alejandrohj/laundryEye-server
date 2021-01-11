@@ -221,17 +221,17 @@ cartWasherData = {
 
 ### Trello/Kanban
 
-[Link to your trello board](https://trello.com/b/W14CF29f/plaundry) 
+[Link to your trello board](https://trello.com/b/QGG74gk3/laundryeye) 
 
 ### Git
 
 The url to your repository and to your deployed project
 
-[Client repository Link](https://github.com/llanting/plaundry-client)
+[Client repository Link](https://github.com/alejandrohj/laundryeye-client)
 
-[Server repository Link](https://github.com/llanting/plaundry-server)
+[Server repository Link](https://github.com/alejandrohj/laundryEye-server)
 
-[Deployed App Link](https://dashboard.heroku.com/apps/plaundry)
+[Deployed App Link](https://laundryeye.herokuapp.com/)
 
 ### Slides
 
