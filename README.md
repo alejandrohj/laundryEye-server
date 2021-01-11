@@ -10,19 +10,8 @@ LaundryEye is a web application to supervising, controling, manage automatic pro
 
 - **Home**: Visitor can see the both lines of linen ironing and foldering.
 - **Carts Washer**: (auth) visitor can see and manage the cart washer of the plant.
-- **Filter**: visitor can select a specific category of items.
-- **Add to cart**: Visitor can choose item-quantity and add items to a cart.
-- **Signup**: Visitor has to Sign Up/Log In to visit the cart. 
-- **LogIn**: Visitor has to Sign Up/Log In to visit the cart. 
-- **Cart**: User can edit cart, increase quantity, or delete items.
-- **Delivery**: User can choose time and date for pick-up and delivery.
-- **Pay**: User pays cart (Sprite).
-- **Orderhistory**: User can see all past orders and order-status.
-- **Log out**: User can log out.
-- **Delete**: User can delete the profile.
-- **Admin/New, edit and delete**: Admin-user who can make new laundry-items and edit and delete current items.
-- **Admin/Delivery**: Admin-user who can see all orders and change their status.
-- **Deliveryman**: delivery-man that can see orders and change status.
+- **GMAO**: (auth) visitor can manage the stock and the mantenance of the factory.
+- **UsersManagement**: (auth) visitor can manage the users of the application.
 - **404**: User wants to see a nice 404-page.
 
 ## Backlog
