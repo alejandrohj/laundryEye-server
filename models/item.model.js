@@ -4,10 +4,12 @@ const itemSchema = new Schema({
   name:{
     type: String,
     required: true,
-    unique: true
   },
   branch: String,
-  ref: String,
+  ref: {
+    type: String,
+    unique: true
+  },
   category: {
     type: String,
     enum: ['repuesto','consumible']
