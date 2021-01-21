@@ -9,16 +9,7 @@ const warehouseSchema = new Schema({
   floor:{
     type: String,
     required: true
-  },
-  stock: [{
-    _id:false,
-    itemId: {
-      type: Schema.Types.ObjectId,
-      ref: 'item'
-    },
-    quantity: Number
-  }]
-
+  }
 })
 
 module.exports = model('warehouse', warehouseSchema)

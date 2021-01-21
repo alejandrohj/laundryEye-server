@@ -22,9 +22,6 @@ const itemSchema = new Schema({
     type: String,
     enum: ['metros','unidades','litros','kilos']
   },
-  provider:{
-    type: String
-  },
   createBy: {
       type: Schema.Types.ObjectId,
       ref: 'user'
@@ -34,7 +31,15 @@ const itemSchema = new Schema({
     ref: 'user'
 },
   commentary: String,
-  price: Number
+  price: Number,
+  quantity: {
+    type: Number,
+    default: 1
+  },
+  warehouse: {
+    type: Schema.Types.ObjectId,
+    ref: 'warehouse'
+  }
 })
 
-module.exports = model('item', itemSchema)
+module.exports = model('stockItem', itemSchema)
