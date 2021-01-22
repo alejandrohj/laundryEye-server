@@ -39,6 +39,20 @@ router.get('/gmao/warehouse/:id',(req,res)=>{
       })
     })
 })
+router.delete('/gmao/:id/warehouse/delete',(req,res)=>{
+  console.log('deleting',req.params.id)
+  Warehouses.findByIdAndDelete(req.params.id)
+    .then((data)=>{
+      console.log(data, 'waht')
+      res.status(200).json(data)
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        error: 'No data created',
+        message: err
+      })
+    })
+})
 
 router.post('/gmao/item/create',(req,res)=>{
   let createBy = req.session.loggedInUser;
@@ -56,8 +70,8 @@ router.post('/gmao/item/create',(req,res)=>{
 })
 router.post('/gmao/item/:id/update',(req,res)=>{
   let updatedBy = req.session.loggedInUser;
-  const {name,branch,ref,category,subcategory,unit,commentary,price} = req.body;
-  Items.findByIdAndUpdate(req.params.id,{$set:{name,branch,ref,category,subcategory,unit,commentary,price, updatedBy: updatedBy._id}})
+  const {name,branch,ref,category,subcategory,unit,commentary,price,warehouse} = req.body;
+  Items.findByIdAndUpdate(req.params.id,{$set:{name,branch,ref,category,subcategory,unit,commentary,price, updatedBy: updatedBy._id, warehouse}})
     .then((data)=>{
       res.status(200).json(data)
     })
@@ -110,24 +124,11 @@ router.get('/gmao/items',(req,res)=>{
 })
 router.get('/gmao/item/:id',(req,res)=>{
   Items.findById({_id:req.params.id})
+  .populate('warehouse')
   .populate('createBy')
   .populate('updatedBy')
   .then((data)=>{
     res.status(200).json(data)
-  })
-})
-
-router.post('gmao/item/:id/changeamount',(req,res)=>{
-  const {quantity} = req.body;
-  Items.findByIdAndUpdate(req.params.id,{$set:{quantity}})
-  .then((data)=>{
-    res.status(200).json(data)
-  })
-  .catch((err)=>{
-    res.status(500).json({
-      error: 'No data created',
-      message: err
-    })
   })
 })
 
