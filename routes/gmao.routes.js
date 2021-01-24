@@ -69,9 +69,10 @@ router.post('/gmao/item/create',(req,res)=>{
     })
 })
 router.post('/gmao/item/:id/update',(req,res)=>{
+  console.log(req.body)
   let updatedBy = req.session.loggedInUser;
   const {name,branch,ref,category,subcategory,unit,commentary,price,warehouse} = req.body;
-  Items.findByIdAndUpdate(req.params.id,{$set:{name,branch,ref,category,subcategory,unit,commentary,price, updatedBy: updatedBy._id, warehouse}})
+  Items.findByIdAndUpdate(req.params.id,{$set:{name,branch,ref,category,subcategory,unit,commentary,price, updatedBy: updatedBy._id, warehouse: warehouse._id}})
     .then((data)=>{
       res.status(200).json(data)
     })
