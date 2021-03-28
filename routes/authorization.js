@@ -152,8 +152,10 @@ router.post('/logout', (req, res) => {
 router.get('/user', isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
 });
+
 router.get('/user/all', isLoggedIn, (req, res, next) => {
   UserModel.find()
+    .populate('complex')
     .then((data)=>{
       res.status(200).json(data)
     }).catch((err) => {
