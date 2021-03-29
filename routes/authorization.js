@@ -87,7 +87,7 @@ router.post('/signin', (req, res) => {
   if (!email) {
     res.status(500)
       .json({
-        error: 'Please enter your email'
+        error: 'Por favor introduce tu email'
       });
     return;
   }
@@ -95,7 +95,7 @@ router.post('/signin', (req, res) => {
   if (!password) {
     res.status(500)
       .json({
-        error: 'Please enter your password'
+        error: 'Por favor introduce tu contraseña'
       });
     return;
   }
@@ -104,7 +104,7 @@ router.post('/signin', (req, res) => {
     if (!myRegex.test(email)) {
       res.status(500)
         .json({
-          error: 'Please enter a valid email',
+          error: 'Por favor introduce un email valido',
         })
       return;  
     }
@@ -122,20 +122,20 @@ router.post('/signin', (req, res) => {
             else {
               res.status(500)
                 .json({
-                  error: 'Password doesn\'t match, please try again'
+                  error: 'La contraseña es incorrecta por favor vuelva a intentarlo'
                 })
               return;
             }
           }).catch(() => {
             res.status(500)
               .json({
-                error: 'Password doesn\'t match, please try again'
+                error: 'La contraseña no coincide por favor vuelva a intentarlo'
               })
             return;
           });
       }).catch(() => {
         res.status(500).json({
-          error: 'Email doesn\'t match, please try again'
+          error: 'El email no existe o no está registrado, por favor vuelva a introducirlo correctamente'
         })
         return;
       });

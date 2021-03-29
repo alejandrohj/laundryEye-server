@@ -51,11 +51,11 @@ app.use(session({
   saveUninitialized: true,
   resave: true,
   cookie: {
-    maxAge: 60*60*24*1000*7
+    maxAge: 60*60*24*1000*15
   },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 * 7,
+    ttl: 24 * 60 * 60 * 15,
     autoRemove: 'disabled',
   })
 }));  
