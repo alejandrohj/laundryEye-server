@@ -117,7 +117,7 @@ router.post('/boilers/daily/data/add',(req,res)=>{
   let now = new Date();
   let hour = now.getHours();
   console.log(hour,"maybesend");
-  if(hour==21){
+  if(hour==20){
     console.log("saving boiling data");
     BoilersDataSchema.create([boilerData1,boilerData2,boilerData3])
     .then((resp)=>{
