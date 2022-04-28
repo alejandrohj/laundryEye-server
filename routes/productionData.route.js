@@ -1,8 +1,9 @@
 const express = require('express');
 const router  = express.Router();
 
-let IronsProductivityDataSchema = require('../models/IronsRealTimeData.model')
+let IronsProductivityDataSchema = require('../models/IronsRealTimeData.model');
 let TunelCageWasher = require('../models/CartsWasherRTData.model');
+let BoilersDataSchema = require('../models/boilerOilData.model');
 let Count = 0;
 
 /* GET home page */
@@ -109,6 +110,20 @@ router.get('/rtdata/delete',(req,res)=>{
         message: err
       })
     })
+})
+
+router.post('/boilers/daily/data/add',(req,res)=>{
+  const {boilerData1,boilerData2, boilerData3} = req.body;
+  let now = new Date();
+  let hour = now.getHours();
+  console.log(hour)
+  if(hour===18){
+    BoilersDataSchema.create([boilerData1,boilerData2,boilerData3])
+    .then((resp)=>{
+       res.status(200).json("")
+     })
+  }
+  else{res.status(200).json("")}
 })
 
 module.exports = router;
