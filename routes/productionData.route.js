@@ -121,7 +121,7 @@ router.post('/boilers/daily/data/add',(req,res)=>{
     console.log("saving boiling data");
     BoilersDataSchema.create([boilerData1,boilerData2,boilerData3])
     .then((resp)=>{
-      console.log("boiling data saved");
+      console.log("boiling data saved succesfully");
        res.status(200).json("")
      })
   }
