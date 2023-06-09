@@ -2,6 +2,10 @@ const express = require('express');
 const router  = express.Router();
 const Items = require('../models/item.model');
 const Warehouses = require('../models/warehouse.model');
+const TasksModel = require('../models/MaintenanceTask.model');
+
+let Boiler_N3_Temperature;
+let Boiler_N2_Temperature;
 
 router.post('/gmao/warehouses/create',(req,res)=>{
   const {name, floor} = req.body;
@@ -83,6 +87,7 @@ router.post('/gmao/item/:id/update',(req,res)=>{
       })
     })
 })
+
 router.put('/gmao/item/:id/update/quantity',(req,res)=>{
   let updatedBy = req.session.loggedInUser;
   const {quantity} = req.body.itemToUpdate;
@@ -97,6 +102,7 @@ router.put('/gmao/item/:id/update/quantity',(req,res)=>{
       })
     })
 })
+
 router.delete('/gmao/item/:id/delete',(req,res)=>{
   Items.findByIdAndDelete(req.params.id)
     .then((data)=>{
@@ -131,6 +137,32 @@ router.get('/gmao/item/:id',(req,res)=>{
   .then((data)=>{
     res.status(200).json(data)
   })
+})
+
+router.post('/gmao/task/create',(req,res)=>{
+  let createBy = req.session.loggedInUser;
+  const {taskTitle,taskDescription,subTasks,daily,dayToBeCompleted,hoursToMustBeDone, timeToBeCompleted} = req.body;
+  TasksModel.create({taskTitle,taskDescription,subTasks,daily,dayToBeCompleted,hoursToMustBeDone,createBy: createBy._id, timeToBeCompleted})
+    .then((data)=>{
+      res.status(200).json(data)
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        error: 'No data created',
+        message: err
+      })
+    })
+})
+
+router.put('/gmao/boilers/temperature/update',(req,res)=>{
+  const {boilerN3, boilerN2} = req.body;
+  Boiler_N3_Temperature = boilerN3;
+  Boiler_N2_Temperature = boilerN2;
+  res.status(200).json()
+})
+
+router.get('/gmao/boilers/temperature',(req,res)=>{
+  res.status(200).json([Boiler_N3_Temperature,Boiler_N2_Temperature])
 })
 
 module.exports = router;
