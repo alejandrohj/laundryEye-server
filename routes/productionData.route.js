@@ -119,13 +119,22 @@ router.post('/boilers/daily/data/add',(req,res)=>{
   console.log(hour,"maybesend");
   if(hour==20){
     console.log("saving boiling data");
-    BoilersDataSchema.create([boilerData1,boilerData2,boilerData3])
+    BoilersDataSchema.create({boilersData:[{boilerData1,boilerData2,boilerData3}], fecha:now})
     .then((resp)=>{
       console.log("boiling data saved succesfully");
        res.status(200).json("")
      })
   }
   else{res.status(200).json("")}
+})
+
+router.get('/boilers/cdata/all', (req,res)=>{
+  let hoy = new Date();
+  let MesFixed = new Date(`${hoy.getMonth()+1}-01-${hoy.getFullYear()}`)
+  BoilersDataSchema.find({fecha:{$gte:MesFixed}})
+  .then((boildataResp)=>{
+    res.status(200).json(boildataResp)
+  })
 })
 
 module.exports = router;
