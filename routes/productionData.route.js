@@ -129,9 +129,10 @@ router.post('/boilers/daily/data/add',(req,res)=>{
 })
 
 router.get('/boilers/cdata/all', (req,res)=>{
-  let hoy = new Date();
-  let MesFixed = new Date(`${hoy.getMonth()+1}-01-${hoy.getFullYear()}`)
-  BoilersDataSchema.find({fecha:{$gte:MesFixed}})
+  // let hoy = new Date();
+  // let MesFixed = new Date(`${hoy.getMonth()+1}-01-${hoy.getFullYear()}`)
+  // BoilersDataSchema.find({fecha:{$gte:MesFixed}})
+  BoilersDataSchema.find()
   .then((boildataResp)=>{
     res.status(200).json(boildataResp)
   })
