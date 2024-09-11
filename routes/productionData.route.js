@@ -138,4 +138,14 @@ router.get('/boilers/cdata/all', (req,res)=>{
   })
 })
 
+router.post('/boilers/deposit/load/add',(req,res)=>{
+  const {liters} = req.body;
+  let now = new Date();
+  let hour = now.getHours();
+    BoilersDataSchema.create({boilersData:[], fecha:now, load:true, totalLoaded:liters})
+    .then((resp)=>{
+       res.status(200).json("")
+     })
+})
+
 module.exports = router;
