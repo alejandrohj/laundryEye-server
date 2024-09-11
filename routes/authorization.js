@@ -9,6 +9,7 @@ const UserModel = require('../models/user.model');
 router.post('/signup',isLoggedIn, (req, res) => {
   const {userName, firstName, lastName, email, password, userType} = req.body;
   if (!userName) {
+    console.log('Please enter a username')
     res.status(500)
       .json({
         error: 'Please enter a username'
@@ -17,6 +18,7 @@ router.post('/signup',isLoggedIn, (req, res) => {
   }
 
   if (!email) {
+    console.log('Please enter an email')
     res.status(500)
       .json({
         error: 'Please enter an email'
@@ -25,6 +27,7 @@ router.post('/signup',isLoggedIn, (req, res) => {
   }
 
   if (!password) {
+    console.log('Please enter a password')
     res.status(500)
       .json({
         error: 'Please enter a password'
@@ -34,6 +37,7 @@ router.post('/signup',isLoggedIn, (req, res) => {
 
   const emailRegEx = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
   if (!emailRegEx.test(email)) {
+    console.log('Please enter a valid email')
     res.status(500)
       .json({
         error: 'Please enter a valid email'
@@ -41,8 +45,9 @@ router.post('/signup',isLoggedIn, (req, res) => {
     return;
   }
 
-  const passwordRegEx = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
+  const passwordRegEx = new RegExp(/^(?=.{8,})/);
   if (!passwordRegEx.test(password)) {
+    console.log('Invalid paass')
     res.status(500)
       .json({
         error: 'Password must contain letter, uppercase letter, number and a special character, and needs to have 8 characters.'
